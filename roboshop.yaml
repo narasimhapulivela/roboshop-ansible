@@ -37,7 +37,7 @@
         ttl: 1
         value: "{{ item.instance [0].private_ip_address }}"
         wait: true
-     loop: "{{ ce2_output.results }}"
+     loop: "{{ ec2_output.results }}"
 
    - name: create r53 records
      amazon.aws.route53:
@@ -48,6 +48,6 @@
         ttl: 1
         value: "{{ item.instance [0].public_ip_address }}"
         wait: true
-     loop: "{{ ce2_output.results }}"  
+     loop: "{{ ec2_output.results }}"  
      when: item.item == "frontend"
     
