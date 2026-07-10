@@ -39,4 +39,15 @@
         wait: true
      loop: "{{ ce2_output.results }}"
 
- 
+   - name: create r53 records
+     amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "roboshop-{{ env }}.{{ domain_name }}"
+        type: A 
+        ttl: 1
+        value: "{{ item.instance [0].public_ip_address }}"
+        wait: true
+     loop: "{{ ce2_output.results }}"  
+     when: item.item == "frontend"
+    
