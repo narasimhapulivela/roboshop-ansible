@@ -20,10 +20,10 @@
       state: started
 
   - name: allow remote connection
-    ansible.builtin.replace:
+    ansible.builtin.lineinfile:
       path: /etc/mongod.conf
-      regexp: 'bindIp: 127.0.0.1'
-      replace: 'bindIp: 0.0.0.0'
+      regexp: '^  bindIp: '
+      line: 'bindIp: 0.0.0.0'
 
 
   - name: start and enable mongodb
