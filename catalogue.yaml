@@ -47,6 +47,7 @@
   - name: install dependencies
     community.general.npm:
       path: /app
+  
   - name: copy catalogue service
     ansible.builtin.copy:
       src: catalogue.service
